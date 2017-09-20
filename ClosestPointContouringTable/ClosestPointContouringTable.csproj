@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{51B95C25-1466-4FB4-9660-0F04F283D8DE}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>DirectContouringTableGen</RootNamespace>
-    <AssemblyName>DirectContouringTableGen</AssemblyName>
+    <RootNamespace>ClosestPointContouringTable</RootNamespace>
+    <AssemblyName>ClosestPointContouringTable</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -49,7 +49,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dc_table.txt" />
+    <Content Include="cpc_table.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

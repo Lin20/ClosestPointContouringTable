@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DirectContouringTableGen
+namespace ClosestPointContouringTable
 {
 	public class Program
 	{
@@ -120,7 +120,7 @@ namespace DirectContouringTableGen
 							}
 							else
 							{
-								write_output(output, i, out_mask, counts);
+								write_output(output, i, out_mask, counts, flip);
 							}
 							Console.WriteLine("{0}\t: case {1}{2}.", i, out_mask, (out_mask > 11 ? " (unknown)" : out_mask == 11 ? " (corner)" : out_mask >= 8 ? " (quad)" : ""));
 						}
@@ -149,11 +149,11 @@ namespace DirectContouringTableGen
 
 			try
 			{
-				StreamWriter sw = new StreamWriter(File.Open("C:\\dc_table.txt", FileMode.OpenOrCreate));
+				StreamWriter sw = new StreamWriter(File.Open("cpc_table.txt", FileMode.Create));
 				sw.Write(str_out.ToString());
 				sw.Close();
 			}
-			catch(Exception)
+			catch (Exception)
 			{
 				Console.WriteLine("Failed to write file.");
 			}
@@ -251,7 +251,7 @@ namespace DirectContouringTableGen
 			return output;
 		}
 
-		static void write_output(int[,] output, int mask, int case_id, int[] counts)
+		static void write_output(int[,] output, int mask, int case_id, int[] counts, bool flip)
 		{
 			int[] new_indexes = new int[8];
 
@@ -303,7 +303,12 @@ namespace DirectContouringTableGen
 				if (i >= tri_cases[case_id].Length)
 					output[mask, i] = -1;
 				else
-					output[mask, i] = new_indexes[tri_cases[case_id][i]];
+				{
+					if (flip)
+						output[mask, i] = new_indexes[tri_cases[case_id][2 - i % 3 + i / 3 * 3]];
+					else
+						output[mask, i] = new_indexes[tri_cases[case_id][i]];
+				}
 			}
 		}
 	}
